@@ -4,7 +4,7 @@
 
   //lazyboy
   Model = require('LazyBoy');
-  Model.create_connection("lancewave");
+  Model.create_connection("tutorstore");
   Model.load('models');
   var User = Model('User');
   var my_user = User.where("name","Jimi", function(err,users){
@@ -24,6 +24,6 @@
   app.get('/', function(request, response) {
     return response.render('index');
   });
-  app.listen(3000);
+  app.listen(3001);
   console.log("Express server started on port %s", app.address().port);
 }).call(this);
