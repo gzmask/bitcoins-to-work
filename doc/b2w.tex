@@ -113,7 +113,7 @@ Properties
 
 \subsection{Accept a work solution}
 \begin{enumerate}
-	\item If the solution is accepted, $U_1$ will offered a rating chance to rate $U_2$'s work quality as excellent or good.
+	\item If the solution is accepted, $U_1$ will offered a rating chance to rate $U_2$'s work quality as excellent or good, and this rating is boardcasted.
 	\item If the solution is rejected, then $U_1$ now needs to submit a dispute $D_1$. The dispute will decide if $U_2$'s work quality is good or bad. If the dispute result is good, $U_1$'s honest rating will be deducted. 
 \end{enumerate}
 
@@ -130,10 +130,7 @@ Properties
 Since needers have to be staying online to wait for solutions, thus they are most likely potential voter nodes. These nodes can be seen as super nodes that can be used to handle extra services.
 
 \section{Security}
-It's easy to see that the system is prone to fraud client attacks. A fraud node can post needs without a deposit and the worker node giving solution to that need therefore is cheated. I am still figuring out a decentralize mechanism to solve this problem. For now, to solve this we need a centralize Need, Dispute, Deposit and Processing Fee hosting service. Or, simply give the Needer nodes trust while the on going work is not too costly(say, answering questions).
-
-\subsection{Account reputation directory}
-A potential solution to the fraud client problem is to add an P2P account work\_quality directory, so that Need posting nodes will have a reputation reference similar to ebay's seller ratings/feedback system.
+It's easy to see that the system is prone to fraud client attacks. A fraud node can boardcast fake honest rating results. 
 
 \begin{thebibliography}{9}
 \end{thebibliography}
