@@ -84,13 +84,13 @@ Properties
 \begin{enumerate}
 	\item a node $U_1$ boardcasts, to $Log(N)$ nodes, a need $N_1$ in the network while deposits O bitcoins into $N_1$ as an offer.
 	\item all other nodes $U_x$ receive the boardcast of $N_1$ and store it locally
-	\item after the time\_available expired, each node removes $N_1$ permanently, and deposit O returns to $U_1$
+	\item after the TTL expired, each node removes $N_1$ permanently, and deposit O returns to $U_1$
 	\item when $U_1$ logs off, it will not longer be able to accept proposed works. $U_1$ is supposed to be online until a solution is accepted.  
 \end{enumerate}
 
 \subsection{Propose a work}
 \begin{enumerate}
-	\item any node can propose a work for a need, in this example, $N_1$. 
+	\item any node can propose a work for a need.
 	\item let $U_2$ be a node proposing a work $W_1$. $U_2$ send a message to $U_1$, telling $U_1$ that $W_1$ is proposed at $U_2$.
 	\item $U_1$ gets notified that $W_1$ is proposed. There can be multiple works that are proposed by other nodes. 
 	\item $U_1$ can accept one of the proposed work, or wait. If $N_1$ expires, all proposed works expire at the same time and the case is over.
@@ -104,7 +104,7 @@ Properties
 	\item If the solution is rejected, then $U_1$ submits a dispute $D_1$. When $D_1$ is created, $U_1$ needs to deposit P bitcoins into the $D_1$ and the offer O in $W_1$ will be deducted by P. Then it starts the peer-review voting process.
 \end{enumerate}
 
-\subsection{resolve a dispute}
+\subsection{Resolve a dispute}
 \begin{enumerate}
 	\item nodes can choose to peer-review dispute cases to earn bitcoins. The reward for an effective vote is R, that is, when the vote agrees with the end result. A dispute is resolved only after reviewed by log(K) randomly chosen nodes.
 	\item when $U_1$ files $D_1$, it searches for other voter Nodes and pick one randomly, say $U_3$. 
@@ -118,7 +118,7 @@ Properties
 Since needers have to be staying online to wait for solutions, thus they are most likely potential voter nodes. These nodes can be seen as super nodes that can be used to handle extra services.
 
 \section{security}
-It's easy to see that the system is prone to fraud client attacks. A fraud node can post needs without a deposit and the worker node giving solution to that need therefore is cheated. I am still figuring out a decentralize mechanism to solve this problem. For now, to solve this we need a centralize Need and deposit hosting server.
+It's easy to see that the system is prone to fraud client attacks. A fraud node can post needs without a deposit and the worker node giving solution to that need therefore is cheated. I am still figuring out a decentralize mechanism to solve this problem. For now, to solve this we need a centralize Need, Dispute, Deposit and Processing Fee hosting service. Or, simply give the Needer nodes trust while the on going work is not too costly(say, answering questions).
 
 \begin{thebibliography}{9}
 \end{thebibliography}
