@@ -40,7 +40,8 @@ R = 2 \times \frac{P}{(K \times \frac{correct\_votes}{total\_votes})}
 This model stores in log(N) nodes\\
 Properties
 \begin{itemize}
-	\item IP address
+	\item IP\_address
+	\item Email\_address
 	\item is\_voter
 \end{itemize}
 
@@ -117,8 +118,11 @@ Properties
 \section{Super nodes: needer nodes or voter nodes}
 Since needers have to be staying online to wait for solutions, thus they are most likely potential voter nodes. These nodes can be seen as super nodes that can be used to handle extra services.
 
-\section{security}
+\section{Security}
 It's easy to see that the system is prone to fraud client attacks. A fraud node can post needs without a deposit and the worker node giving solution to that need therefore is cheated. I am still figuring out a decentralize mechanism to solve this problem. For now, to solve this we need a centralize Need, Dispute, Deposit and Processing Fee hosting service. Or, simply give the Needer nodes trust while the on going work is not too costly(say, answering questions).
+
+\subsection{Account reputation directory}
+A potential solution to the fraud client problem is to add an P2P account reputation directory, so that Need posting nodes will have a repuation reference similar to ebay's seller ratings/feedback system.
 
 \begin{thebibliography}{9}
 \end{thebibliography}
