@@ -21,34 +21,38 @@ This is a paper of a P2P system that let users trade digital works online, kind 
 \section{Introduction}
 Online trading using credit cards or paypal-like system is popular. A famous exampe is Ebay.com. All these systems are centralize, thus the trades are slow and controlled by some private parties in some degree. As bitcoins emerged, pure P2P system is getting recognized. Here I proposed a very basic and simple design for a P2P trading system. 
 
-\section{Important constants(Skip this if you are reading first time)}
+\section{Important constants}
 N: Total user amount (updates weekly)\\
 K: Total voter amount (updates three days)\\
-O: offer of the posted Need\\
-P: process fee of the dispute. 
-\[
-P = smaller(\frac{O}{10}, \frac{O}{K})
-\]
-R: reward for each voter. 
-\[
-R = 2 \times \frac{P}{(K \times \frac{correct\_votes}{total\_votes})}
-\]
 
 \section{Models}
 
-\subsection{Node}
+\subsection{Node table}
 This model stores in all (N) nodes\\
 Properties
 \begin{itemize}
 	\item IP\_address
 	\item Email\_address
-	\item Email\_password
-	\item work\_quality
-	\item honest\_rating
 	\item is\_voter
 \end{itemize}
 
-work quality:
+\subsection{Reputation block chain}
+This model stores in all (N) nodes\\
+Properties
+\begin{itemize}
+	\item Email\_address
+	\item work\_quality
+	\item honest\_rating
+\end{itemize}
+\begin{itemize}
+	\item Email\_address
+	\item dispute\_history
+	\item solution\_accepted\_history
+\end{itemize}
+
+This two values has similar structure as the bitcoins block chain
+
+work quality/honest rating:
 if ratings less than 10, shows actually numbers of ratings. i.e. 5:1:0 where 5 rates excellent, 1 rates good and 0 rates bad;
 if ratings more than 10, only shows percentages. i.e. 33\%:33\%:33\% This prevents profile bias towards worker nodes with less cases done.
 
@@ -119,7 +123,7 @@ Properties
 
 \subsection{Resolve a dispute}
 \begin{enumerate}
-	\item nodes can choose to peer-review dispute cases to earn honest rating. The reward for an effective vote is R, that is, when the vote agrees with the end result. A dispute is resolved only after reviewed by log(K) randomly chosen nodes.
+	\item nodes can choose to peer-review dispute cases to earn honest rating. A dispute is resolved only after reviewed by log(K) randomly chosen nodes.
 	\item when $U_1$ files $D_1$, it searches for other voter Nodes and pick one randomly, say $U_3$. 
 	\item $U_1$ sets $D_1$'s next\_voter\_address to $U_3$, and $U_3$ dupes $D_1$ locally. 
 	\item $U_3$ reviews the case, vote, and picks another voter node randomly, until reaches $U_{log(K)}$.
