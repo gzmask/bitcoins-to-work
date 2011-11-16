@@ -38,7 +38,7 @@ R = 2 \times \frac{P}{(K \times \frac{correct\_votes}{total\_votes})}
 \section{Models}
 
 \subsection{Node}
-This model stores in every node\\
+This model stores in log(N) nodes\\
 Properties
 \begin{itemize}
 	\item IP address
@@ -46,7 +46,7 @@ Properties
 \end{itemize}
 
 \subsection{Need}
-This model stores in every node\\
+This model stores in Log(N) nodes\\
 Properties
 \begin{itemize}
 	\item time\_to\_live
@@ -115,8 +115,11 @@ Properties
 	\item $U_1$ either keeps the deposit $O-R$ or gives $O-R$ to $U_2$ depends on the result.
 \end{enumerate}
 
-\subsection{needer nodes as voter nodes}
+\section{needer nodes as voter nodes}
 Since needers have to be logged online to wait for answers, have to wait for solutions, thus they are most likely potential voter nodes. Voter nodes can be seen as super nodes that can be used to handle extra services.
+
+\section{security}
+It's easy to see that the system is prone to fraud client attacks. A frauding node can post needs without a deposit and the worker node giving solution to that need therefore is cheated. I am still figuring out a decentralize mechnism to solve this problem.
 
 \begin{thebibliography}{9}
 \end{thebibliography}
