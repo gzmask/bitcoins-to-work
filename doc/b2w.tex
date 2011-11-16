@@ -49,7 +49,7 @@ Properties
 This model stores in every node\\
 Properties
 \begin{itemize}
-	\item time\_available
+	\item time\_to\_live
 	\item offer
 	\item src\_node\_address
 \end{itemize}
@@ -58,13 +58,13 @@ Properties
 This model stores in posted node\\
 Properties
 \begin{itemize}
+	\item time\_to\_live
 	\item proposal
-	\item time\_available
+	\item accepted
 	\item price
 	\item src\_node\_address
 	\item des\_node\_address
 	\item solution
-	\item accepted
 \end{itemize}
 
 \subsection{Dispute}
@@ -83,7 +83,7 @@ Properties
 
 \subsection{Post a Need}
 \begin{enumerate}
-	\item a node $U_1$ boardcasts$O(N)$ a need $N_1$ in the network while deposits O bitcoins into $W_1$ as an offer.
+	\item a node $U_1$ boardcasts, in $O(N)$ time, a need $N_1$ in the network while deposits O bitcoins into $W_1$ as an offer.
 	\item all other nodes $U_x$ receive the boardcast of $N_1$ and store it locally
 	\item after the time\_available expired, each node removes $N_1$ permanently, and deposit O returns to $U_1$
 	\item when $U_1$ logs off, it will not longer be able to accept proposed works. $U_1$ is supposed to be online until a solution is accepted.  
