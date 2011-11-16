@@ -42,9 +42,14 @@ Properties
 \begin{itemize}
 	\item IP\_address
 	\item Email\_address
+	\item Email\_password
 	\item reputation
 	\item is\_voter
 \end{itemize}
+
+reputation:
+if ratings less than 10, shows actually numbers of ratings. i.e. 5:1 where 5 rates good and 1 rates bad;
+if ratings more than 10, only shows percentages. This prevents profile bias towards worker nodes.
 
 \subsection{Need}
 This model stores in Log(N) nodes\\
@@ -93,7 +98,7 @@ Properties
 \subsection{Propose a work}
 \begin{enumerate}
 	\item any node can propose a work for a need.
-	\item let $U_2$ be a node proposing a work $W_1$. $U_2$ send a message to $U_1$, telling $U_1$ that $W_1$ is proposed at $U_2$.
+	\item let $U_2$ be a node proposing a work $W_1$. $U_2$ send a Email to $U_1$, telling $U_1$ that $W_1$ is proposed at $U_2$.
 	\item $U_1$ gets notified that $W_1$ is proposed. There can be multiple works that are proposed by other nodes. 
 	\item $U_1$ can accept one of the proposed work, or wait. If $N_1$ expires, all proposed works expire at the same time and the case is over.
 \end{enumerate}
