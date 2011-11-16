@@ -32,7 +32,7 @@ P = smaller(\frac{O}{10}, \frac{O}{K})
 \]
 R: reward for each voter. 
 \[
-R = \frac{P}{(K \times \frac{correct\_votes}{total\_votes})}
+R = 2 \times \frac{P}{(K \times \frac{correct\_votes}{total\_votes})}
 \]
 
 \section{Models}
@@ -74,7 +74,8 @@ Properties
 	\item needer\_ip\_address
 	\item worker\_ip\_address
 	\item vote
-	\item process\_fee
+	\item needer\_process\_fee
+	\item worker\_process\_fee
 	\item next\_voter\_address
 \end{itemize}
 
@@ -82,9 +83,9 @@ Properties
 
 \subsection{Post a Need}
 \begin{enumerate}
-	\item a node $U_1$ boardcasts$O(N)$ a need $N_1$ in the network
+	\item a node $U_1$ boardcasts$O(N)$ a need $N_1$ in the network while deposits O bitcoins into $W_1$ as an offer.
 	\item all other nodes $U_x$ receive the boardcast of $N_1$ and store it locally
-	\item after the time\_available expired, each node removes $N_1$ permanently.
+	\item after the time\_available expired, each node removes $N_1$ permanently, and deposit O returns to $U_1$
 	\item when $U_1$ logs off, it will not longer be able to accept proposed works. $U_1$ is supposed to be online until a solution is accepted.  
 \end{enumerate}
 
@@ -100,12 +101,21 @@ Properties
 \begin{enumerate}
 	\item let $U_1$ accepts $W_1$ from $U_2$. Then $U_1$ sends a message to $U_2$, $W_1$ is accepted and $U_2$ can give a solution to $W_1$.
 	\item After $U_2$ submits a solution for $W_1$, $U_1$ receives a message notification that he can review the solution from $U_2$. Now $U_1$ can either chose to accept or reject the solution.
-	\item If the solution is accepted, the deposit bitcoins in $N_1$ will be transfered to $U_2$.
-	\item If the solution is rejected, then $U_1$ submits a dispute $D_1$, which is boardcasted to the network. And starts the peer-review voting process.
+	\item If the solution is accepted, the deposited bitcoins in $N_1$ will be transfered to $U_2$.
+	\item If the solution is rejected, then $U_1$ submits a dispute $D_1$. When $D_1$ is created, $U_1$ needs to deposit P bitcoins into the $D_1$ and the offer O in $W_1$ will be deducted by P. Then it starts the peer-review voting process.
+\end{enumerate}
+
+\subsection{resolve a dispute}
+\begin{enumerate}
+	\item nodes can choose to peer-review dispute cases to earn bitcoins. The reward for an effective vote is R, that is, when the vote agrees with the end result. A dispute is resolved only after reviewed by log(N) randomly chosen nodes.
+	\item when $U_1$ files $D_1$, it searches for other voter Nodes and pick one randomly, say $U_3$. 
+	\item $U_1$ sets $D_1$'s next\_voter\_address to $U_3$, and $U_3$ dupes $D_1$ locally. 
+	\item $U_3$ reviews the case, vote, and picks another voter node randomly, until reaches $U_{log(N)}$.
+	\item $U_{log(N)}$ notifies needer, worker and other voters the result.
+	\item $U_1$ either keeps the deposit $O-R$ or gives $O-R$ to $U_2$ depends on the result.
 \end{enumerate}
 
 \begin{thebibliography}{9}
-
 \end{thebibliography}
 
 	
