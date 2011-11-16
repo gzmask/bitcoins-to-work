@@ -1,11 +1,18 @@
 Server Deployment instructions:
 
 1. install deps
-apt-get install libssl-dev vim-nox nginx unzip g++ screen git-core 
-nodejs 4.10
-npm
+CrouchDB
+Libssl-dev 
+Vim-nox 
+Nginx 
+Unzip 
+G++ 
+Screen 
+Git-core 
+Nodejs 0.6.1
+Npm
 
-2. vim /etc/nginx/sites-available/tutor_store
+2. vim /etc/nginx/sites-available/b2w
 =====================================================
 upstream app_cluster_1 {
         server 127.0.0.1:3001;
@@ -13,8 +20,8 @@ upstream app_cluster_1 {
 
 server {
         listen 0.0.0.0:80;
-        server_name tutor_store.com www.tutor_store.com;
-        access_log /var/log/nginx/tutor_store.log;
+        server_name b2w.com www.b2w.com;
+        access_log /var/log/nginx/b2w.log;
 
         location / {
           proxy_set_header X-Real-IP $remote_addr;
@@ -29,8 +36,8 @@ server {
 =====================================================
 
 3. enable nginx server
-ln -s /etc/nginx/sites-available/tutor_store /etc/nginx/sites-enabled/tutor_store
+ln -s /etc/nginx/sites-available/b2w /etc/nginx/sites-enabled/b2w
 
-4. under the tutor_store folder, run: npm install forever 
+4. under the b2w folder, run: npm install forever LazyBoy ejs express
 
 5. <path-to-forever-npm_module>/bin/forever start app.js

@@ -1,0 +1,114 @@
+\title{P2P bitcoins trading system}
+\author{
+	Gzmask Late\\
+	Gzmask.github.com
+}
+\date{\today}
+
+\documentclass[12pt]{article}
+\setlength{\parindent}{0in}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{parskip}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This is a paper of a P2P system that let users trade digital works online. There are some basic peer-review processes that guarantee the works are paid fairly.
+\end{abstract}
+
+\section{Introduction}
+Online trading using credit cards or paypal-like system is popular. A famous exampe is Ebay.com. All these systems are centralize, thus the trades are slow and controlled by some private parties in some degree. As bitcoins emerged, pure P2P system is getting recognized. Here I proposed a very basic and simple design for a P2P trading system. 
+
+\section{Important constants}
+N: Total user amount (updates weekly)\\
+K: Total voter amount (updates three days)\\
+O: offer of the posted Need\\
+P: process fee of the dispute. 
+\[
+P = smaller(\frac{O}{10}, \frac{O}{K})
+\]
+R: reward for each voter. 
+\[
+R = \frac{P}{(K \times \frac{correct\_votes}{total\_votes})}
+\]
+
+\section{Models}
+
+\subsection{Node}
+This model stores in every node\\
+Properties
+\begin{itemize}
+	\item IP address
+	\item is\_voter
+\end{itemize}
+
+\subsection{Need}
+This model stores in every node\\
+Properties
+\begin{itemize}
+	\item time\_available
+	\item offer
+	\item src\_node\_address
+\end{itemize}
+
+\subsection{Work}
+This model stores in posted node\\
+Properties
+\begin{itemize}
+	\item proposal
+	\item time\_available
+	\item price
+	\item src\_node\_address
+	\item des\_node\_address
+	\item solution
+	\item accepted
+\end{itemize}
+
+\subsection{Dispute}
+This model stores in posted node\\
+Properties
+\begin{itemize}
+	\item needer\_ip\_address
+	\item worker\_ip\_address
+	\item vote
+	\item process\_fee
+	\item next\_voter\_address
+\end{itemize}
+
+\section{Actions}
+
+\subsection{Post a Need}
+\begin{enumerate}
+	\item a node $U_1$ boardcasts$O(N)$ a need $N_1$ in the network
+	\item all other nodes $U_x$ receive the boardcast of $N_1$ and store it locally
+	\item after the time\_available expired, each node removes $N_1$ permanently.
+	\item when $U_1$ logs off, it will not longer be able to accept proposed works. $U_1$ is supposed to be online until a solution is accepted.  
+\end{enumerate}
+
+\subsection{Propose a work}
+\begin{enumerate}
+	\item any node can propose a work for a need, in this example, $N_1$. 
+	\item let $U_2$ be a node proposing a work $W_1$. $U_2$ send a message to $U_1$, telling $U_1$ that $W_1$ is proposed at $U_2$.
+	\item $U_1$ gets notified that $W_1$ is proposed. There can be multiple works that are proposed by other nodes. 
+	\item $U_1$ can accept one of the proposed work, or wait. If $N_1$ expires, all proposed works expire at the same time and the case is over.
+\end{enumerate}
+
+\subsection{Accept a work solution}
+\begin{enumerate}
+	\item let $U_1$ accepts $W_1$ from $U_2$. Then $U_1$ sends a message to $U_2$, $W_1$ is accepted and $U_2$ can give a solution to $W_1$.
+	\item After $U_2$ submits a solution for $W_1$, $U_1$ receives a message notification that he can review the solution from $U_2$. Now $U_1$ can either chose to accept or reject the solution.
+	\item If the solution is accepted, the deposit bitcoins in $N_1$ will be transfered to $U_2$.
+	\item If the solution is rejected, then $U_1$ submits a dispute $D_1$, which is boardcasted to the network. And starts the peer-review voting process.
+\end{enumerate}
+
+\begin{thebibliography}{9}
+
+\end{thebibliography}
+
+	
+
+\end{document}
+

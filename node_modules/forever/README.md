@@ -28,6 +28,7 @@ There are two distinct ways to use forever: through the command line interface, 
 You can use forever to run any kind of script continuously (whether it is written in node.js or not). The usage options are simple:
 
 ```
+  $ forever --help
   usage: forever [action] [options] SCRIPT [script-options]
 
   Monitors the script specified in the current process or as a daemon
@@ -41,6 +42,8 @@ You can use forever to run any kind of script continuously (whether it is writte
     config              Lists all forever user configuration
     set <key> <val>     Sets the specified forever config <key>
     clear <key>         Clears the specified forever config <key>
+    logs                Lists log files for all forever processes
+    logs <script|index> Tails the logs for <script|index>
     columns add <col>   Adds the specified column to the output in `forever list`
     columns rm <col>    Removed the specified column from the output in `forever list`
     columns set <cols>  Set all columns for the output in `forever list`
@@ -58,9 +61,11 @@ You can use forever to run any kind of script continuously (whether it is writte
     --sourceDir      The source directory for which SCRIPT is relative to
     --minUptime      Minimum uptime (millis) for a script to not be considered "spinning"
     --spinSleepTime  Time to wait (millis) between launches of a spinning script.
+    --plain          Disable command line colors
     -d, --debug      Forces forever to log debug output
     -v, --verbose    Turns on the verbose messages from Forever
     -s, --silent     Run the child script silencing stdout and stderr
+    -w, --watch      Watch for file changes
     -h, --help       You're staring at it
 
   [Long Running Process]
@@ -128,6 +133,7 @@ There are several options that you should be aware of when using forever. Most o
     'uid': 'your-UID'           // Custom uid for this forever process. (default: autogen)
     'pidFile': 'path/to/a.pid', // Path to put pid information for the process(es) started
     'max': 10,                  // Sets the maximum number of times a given script should run
+    'killTree': true            // Kills the entire child process tree on `exit`
     
     //
     // These options control how quickly forever restarts a child process
@@ -143,6 +149,14 @@ There are several options that you should be aware of when using forever. Most o
     'command': 'perl',         // Binary to run (default: 'node')
     'options': ['foo','bar'],  // Additional arguments to pass to the script,
     'sourceDir': 'script/path' // Directory that the source script is in
+    
+    //
+    // Options for restarting on watched files.
+    //
+    'watch': false              // Value indicating if we should watch files.
+    'watchIgnoreDotFiles': null // Dot files we should read to ignore ('.foreverignore', etc).
+    'watchIgnorePatterns': null // Ignore patterns to use when watching files.
+    'watchDirectory': null      // Top-level directory to watch from.
     
     //
     // All or nothing options passed along to `child_process.spawn`.
@@ -203,6 +217,9 @@ Stops all forever scripts currently running. This method returns an EventEmitter
 
 ### forever.list (format, callback)
 Returns a list of metadata objects about each process that is being run using forever. This method is synchronous and will return the list of metadata as such. Only processes which have invoked `forever.startServer()` will be available from `forever.list()`
+
+### forever.tail (target, [length,] callback)
+Responds with the logs from the target script(s) from `tail`. If `length` is provided it is used as the `-n` parameter to `tail`.
 
 ### forever.cleanup ()
 Cleans up any extraneous forever *.pid files that are on the target system. This method returns an EventEmitter that raises the 'cleanUp' event when complete.
