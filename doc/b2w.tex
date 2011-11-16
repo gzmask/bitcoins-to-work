@@ -83,7 +83,7 @@ Properties
 
 \subsection{Post a Need}
 \begin{enumerate}
-	\item a node $U_1$ boardcasts, in $O(N)$ time, a need $N_1$ in the network while deposits O bitcoins into $W_1$ as an offer.
+	\item a node $U_1$ boardcasts, in $Log(N)$ time, a need $N_1$ in the network while deposits O bitcoins into $W_1$ as an offer.
 	\item all other nodes $U_x$ receive the boardcast of $N_1$ and store it locally
 	\item after the time\_available expired, each node removes $N_1$ permanently, and deposit O returns to $U_1$
 	\item when $U_1$ logs off, it will not longer be able to accept proposed works. $U_1$ is supposed to be online until a solution is accepted.  
@@ -107,11 +107,11 @@ Properties
 
 \subsection{resolve a dispute}
 \begin{enumerate}
-	\item nodes can choose to peer-review dispute cases to earn bitcoins. The reward for an effective vote is R, that is, when the vote agrees with the end result. A dispute is resolved only after reviewed by log(N) randomly chosen nodes.
+	\item nodes can choose to peer-review dispute cases to earn bitcoins. The reward for an effective vote is R, that is, when the vote agrees with the end result. A dispute is resolved only after reviewed by log(K) randomly chosen nodes.
 	\item when $U_1$ files $D_1$, it searches for other voter Nodes and pick one randomly, say $U_3$. 
 	\item $U_1$ sets $D_1$'s next\_voter\_address to $U_3$, and $U_3$ dupes $D_1$ locally. 
-	\item $U_3$ reviews the case, vote, and picks another voter node randomly, until reaches $U_{log(N)}$.
-	\item $U_{log(N)}$ notifies needer, worker and other voters the result.
+	\item $U_3$ reviews the case, vote, and picks another voter node randomly, until reaches $U_{log(K)}$.
+	\item $U_{log(K)}$ notifies needer, worker and other voters the result.
 	\item $U_1$ either keeps the deposit $O-R$ or gives $O-R$ to $U_2$ depends on the result.
 \end{enumerate}
 
@@ -119,7 +119,7 @@ Properties
 Since needers have to be staying online to wait for solutions, thus they are most likely potential voter nodes. These nodes can be seen as super nodes that can be used to handle extra services.
 
 \section{security}
-It's easy to see that the system is prone to fraud client attacks. A frauding node can post needs without a deposit and the worker node giving solution to that need therefore is cheated. I am still figuring out a decentralize mechnism to solve this problem.
+It's easy to see that the system is prone to fraud client attacks. A frauding node can post needs without a deposit and the worker node giving solution to that need therefore is cheated. I am still figuring out a decentralize mechanism to solve this problem.
 
 \begin{thebibliography}{9}
 \end{thebibliography}
